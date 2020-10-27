@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+struct node
+{
+    int data;
+    node *next;
+};
+struct node *head=NULL; 
+void insert(int d)
+{
+    node *newnode,*temp;
+    newnode=new node;
+    newnode->data=d;
+    newnode->next=head;
+    if(head==NULL)
+    {
+        head=newnode;
+        newnode->next=head;
+     
+    }
+    else
+    {
+        temp=head;
+        while(temp->next!=head)
+        {
+            temp=temp->next;
+        }
+        temp->next=newnode;
+        newnode->next=head;
+    }
+}
+void ddelete(int n,int m,int S)
+{
+ node *p = head, *p2 = head;
+ while(p->data!=S)
+ {
+     p=p->next;
+     p2=p2->next;
+ }
+while (p->next != p) 
+ { 
+    int count = 0; 
+   while (count != m) 
+   { 
+    p2 = p; 
+    p = p->next; 
+    count++; 
+   } 
+    p2->next = p->next; 
+    free(p); 
+    p = p2->next; 
+ } 
+  
+    cout<<"Joseph's Position:"<<p->data; 
+}
+int main()
+{
+   int n,m,s;
+   cout<<"Enter the number of element = ";
+   cin>>n;
+   cout<<"Enter after how many node deletion should happen = ";
+   cin>>m;
+   cout<<"Enter the starting point = ";
+   cin>>s;
+   int a[n];
+   for(int i=1;i<=n;i++)
+      insert(i);
+   ddelete(n,m,s);
+    return 0;
+}
